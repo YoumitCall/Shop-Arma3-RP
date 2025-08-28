@@ -18,7 +18,7 @@
       "currency": "",
       "category": "alimentation",
       "tags": ["citrouille", "graines"],
-      "image": "images/alimentation.jpg",
+      "image": "images/alimentation.png",
       "in_stock": true,
       "order": 1,
       "description": ""
