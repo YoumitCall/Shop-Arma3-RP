@@ -13,15 +13,15 @@
   "products": [
     {
       "id": "p1",
-      "title": "",
+      "title": "a",
       "price": 0,
-      "currency": "",
+      "currency": "b",
       "category": "alimentation",
       "tags": ["citrouille", "graines"],
       "image": "images/alimentation.png",
       "in_stock": true,
       "order": 1,
-      "description": ""
+      "description": "c"
     },
     {
       "id": "p2",
