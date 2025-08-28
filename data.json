@@ -8,7 +8,7 @@
     "announcement": "Promo d'ouverture ce soir 20H.",
     "theme_primary": "#111827",
     "theme_accent": "#2563eb",
-    "font_family": "Arial"
+    "font_family": "Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
   },
   
   "products": [
