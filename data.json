@@ -10,79 +10,78 @@
     "theme_accent": "#2563eb",
     "font_family": "Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
   },
-  
   "products": [
-    [
-  {
-    "id": "a1",
-    "title": "Citrouille",
-    "price": 3500,
-    "currency": "EUR",
-    "category": "Alimentation",
-    "tags": ["légume", "courge"],
-    "image": "images/citrouille.jpg",
-    "in_stock": true,
-    "order": 1,
-    "description": "Citrouille entière, idéale pour cuisiner ou décorer."
-  },
-  {
-    "id": "a2",
-    "title": "Graines de citrouille",
-    "price": 2100,
-    "currency": "EUR",
-    "category": "Alimentation",
-    "tags": ["graines", "apéritif"],
-    "image": "images/graines_citrouille.jpg",
-    "in_stock": true,
-    "order": 2,
-    "description": "Graines de citrouille décortiquées, riches en nutriments."
-  },
-  {
-    "id": "a3",
-    "title": "Olive",
-    "price": 20,
-    "currency": "EUR",
-    "category": "Alimentation",
-    "tags": ["fruit", "méditerranéen"],
-    "image": "images/olive.jpg",
-    "in_stock": true,
-    "order": 3,
-    "description": "Olive verte, parfaite pour accompagner vos plats."
-  },
-  {
-    "id": "a4",
-    "title": "Bouteille d’eau",
-    "price": 150,
-    "currency": "EUR",
-    "category": "Alimentation",
-    "tags": ["boisson", "hydratation"],
-    "image": "images/bouteille_eau.jpg",
-    "in_stock": true,
-    "order": 4,
-    "description": "Bouteille d’eau minérale, source d’hydratation."
-  },
-  {
-    "id": "a5",
-    "title": "Pizza",
-    "price": 150,
-    "currency": "EUR",
-    "category": "Alimentation",
-    "tags": ["plat", "fast-food"],
-    "image": "images/pizza.jpg",
-    "in_stock": true,
-    "order": 5,
-    "description": "Pizza garnie de fromage et pepperoni."
-  },
-  {
-    "id": "a6",
-    "title": "Bandage",
-    "price": 350,
-    "currency": "EUR",
-    "category": "Alimentation",
-    "tags": ["santé", "secours"],
-    "image": "images/bandage.jpg",
-    "in_stock": true,
-    "order": 6,
-    "description": "Bandage de premiers secours, usage médical."
-  }
-   ]
+    {
+      "id": "a1",
+      "title": "Citrouille",
+      "price": 3500,
+      "currency": "EUR",
+      "category": "Alimentation",
+      "tags": ["légume", "courge"],
+      "image": "images/citrouille.jpg",
+      "in_stock": true,
+      "order": 1,
+      "description": "Citrouille entière, idéale pour cuisiner ou décorer."
+    },
+    {
+      "id": "a2",
+      "title": "Graines de citrouille",
+      "price": 2100,
+      "currency": "EUR",
+      "category": "Alimentation",
+      "tags": ["graines", "apéritif"],
+      "image": "images/graines_citrouille.jpg",
+      "in_stock": true,
+      "order": 2,
+      "description": "Graines de citrouille décortiquées, riches en nutriments."
+    },
+    {
+      "id": "a3",
+      "title": "Olive",
+      "price": 20,
+      "currency": "EUR",
+      "category": "Alimentation",
+      "tags": ["fruit", "méditerranéen"],
+      "image": "images/olive.jpg",
+      "in_stock": true,
+      "order": 3,
+      "description": "Olive verte, parfaite pour accompagner vos plats."
+    },
+    {
+      "id": "a4",
+      "title": "Bouteille d’eau",
+      "price": 150,
+      "currency": "EUR",
+      "category": "Alimentation",
+      "tags": ["boisson", "hydratation"],
+      "image": "images/bouteille_eau.jpg",
+      "in_stock": true,
+      "order": 4,
+      "description": "Bouteille d’eau minérale, source d’hydratation."
+    },
+    {
+      "id": "a5",
+      "title": "Pizza",
+      "price": 150,
+      "currency": "EUR",
+      "category": "Alimentation",
+      "tags": ["plat", "fast-food"],
+      "image": "images/pizza.jpg",
+      "in_stock": true,
+      "order": 5,
+      "description": "Pizza garnie de fromage et pepperoni."
+    },
+    {
+      "id": "a6",
+      "title": "Bandage",
+      "price": 350,
+      "currency": "EUR",
+      "category": "Santé",
+      "tags": ["santé", "secours"],
+      "image": "images/bandage.jpg",
+      "in_stock": true,
+      "order": 6,
+      "description": "Bandage de premiers secours, usage médical."
+    }
+  ]
+}
