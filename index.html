@@ -24,9 +24,7 @@
 
     @media (prefers-reduced-motion:no-preference){
       @keyframes rise{from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none}}
-      @keyframes pulse{0%,100%{box-shadow:0 0 0 rgba(0,0,0,0)} 50%{box-shadow:0 0 24px rgba(249,115,22,.35)}}
       .fade-in{animation:rise .35s ease-out both}
-      .pulse{animation:pulse 2.8s ease-in-out infinite}
     }
 
     html,body{height:100%}
@@ -53,51 +51,57 @@
     .brand img{height:56px; width:56px; object-fit:contain; filter:drop-shadow(0 4px 10px var(--shadow))}
     .title{font-size:1.8rem; font-weight:800; letter-spacing:.2px}
 
-    /* Badges ouverture */
-    .badge{padding:6px 12px; border-radius:999px; font-size:.85rem; font-weight:700; border:1px solid var(--border)}
-    .badge-open{background:linear-gradient(180deg, rgba(34,197,94,.20), rgba(34,197,94,.08)); color:#86efac}
-    .badge-closed{background:linear-gradient(180deg, rgba(239,68,68,.20), rgba(239,68,68,.08)); color:#fca5a5}
-
-    /* CTA téléphone / radio */
-    .actions{display:flex; align-items:center; gap:14px}
-    .cta{
+    /* Info téléphone / radio (non cliquables) */
+    .actions{display:flex; align-items:center; gap:12px}
+    .pill{
       display:inline-flex; align-items:center; gap:10px;
       padding:10px 14px; border-radius:999px;
       background:linear-gradient(135deg,var(--cta),var(--cta2));
       color:#fff; font-weight:800; letter-spacing:.3px;
       border:1px solid rgba(0,0,0,.15);
-      box-shadow:0 8px 18px rgba(249,115,22,.25);
-      transform:translateZ(0);
+      box-shadow:0 6px 14px rgba(249,115,22,.22);
+      user-select:text;
     }
-    .cta svg{width:18px; height:18px; fill:currentColor}
-    .cta[hidden]{display:none !important}
+    .pill svg{width:18px; height:18px; fill:currentColor}
+    .pill[hidden]{display:none !important}
 
-    /* Annonce centrée */
+    /* Annonce centrée plus petite + espacement généreux en dessous */
     .hero{
-      text-align:center; margin:28px 0 20px 0;
-      padding:24px 0 8px 0;
+      text-align:center;
+      margin:24px 0 36px 0;       /* espace au dessus */
+      padding:0;
     }
     .hero-line{
       font-weight:900; text-transform:uppercase; letter-spacing:.12em;
-      font-size:clamp(1.2rem, 2.5vw + .6rem, 2rem);
+      /* plus petit que le logo (1.8rem) */
+      font-size:clamp(1rem, 1.4rem + 1vw, 1.5rem);
       color:#eef2ff;
     }
-    .hero-sub{margin-top:8px; color:var(--muted); font-weight:600}
+    .hero-sub{margin-top:6px; color:var(--muted); font-weight:600}
+    .spacer-below-hero{height:28px}  /* pousse les filtres et la grille vers le bas */
     .hero[hidden]{display:none !important}
 
-    /* Filtres catégories */
-    .filters{display:flex; flex-wrap:wrap; gap:10px; margin:10px 0 18px}
+    /* Filtres catégories lisibles même inactifs */
+    .filters{display:flex; flex-wrap:wrap; gap:10px; margin:0 0 18px}
     .chip{
       padding:8px 12px; border-radius:999px; font-weight:700; font-size:.9rem;
-      border:1px solid var(--border); background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.00));
+      border:1px solid #324064;
+      background:#1a2236;          /* lisible sur fond sombre */
+      color:#cbd5e1;
       cursor:pointer; user-select:none;
     }
-    .chip[aria-pressed="true"]{border-color:color-mix(in oklab, var(--color-accent) 60%, var(--border)); color:var(--text)}
+    .chip:hover{filter:brightness(1.1)}
+    .chip[aria-pressed="true"]{
+      border-color:color-mix(in oklab, var(--color-accent) 65%, var(--border));
+      background:linear-gradient(180deg, rgba(37,99,235,.35), rgba(37,99,235,.15));
+      color:#fff;
+    }
+    .chip:focus-visible{outline:2px solid var(--color-accent); outline-offset:2px}
 
     /* Sections par catégorie */
     .section{margin:18px 0 8px}
     .section h2{
-      font-size:1.15rem; font-weight:900; letter-spacing:.06em; text-transform:uppercase;
+      font-size:1.05rem; font-weight:900; letter-spacing:.06em; text-transform:uppercase;
       margin:8px 0 10px; color:#eaf0ff;
       border-left:4px solid var(--color-accent); padding-left:10px;
     }
@@ -118,8 +122,8 @@
     .title-sm{font-size:1rem; font-weight:800; margin:0 0 6px}
     .price{margin:0 0 6px; font-weight:800; color:var(--color-accent)}
     .desc{font-size:.9rem; color:var(--muted); line-height:1.35}
-    .tags{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px}
-    .tag{font-size:.72rem; padding:4px 8px; border-radius:999px; border:1px solid var(--border); color:#cbd5e1}
+    /* tags masqués visuellement (conservés dans data.json) */
+    .tags{display:none}
 
     .oos{
       position:absolute; top:8px; left:8px; padding:6px 10px; border-radius:999px; font-size:.72rem;
@@ -141,25 +145,27 @@
       </div>
 
       <div class="actions">
-        <span id="openBadge" class="badge">—</span>
-        <a id="phoneCTA" class="cta pulse" hidden>
+        <!-- Téléphone: non cliquable -->
+        <div id="phonePill" class="pill" hidden>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5.5a1 1 0 0 1 1-1H7.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
           <span id="phoneText"></span>
-        </a>
-        <a id="radioCTA" class="cta" hidden>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a1 1 0 0 1 1 1v2.07a7 7 0 0 1 4.93 4.93H20a1 1 0 1 1 0 2h-2.07A7 7 0 0 1 13 17.93V20a1 1 0 1 1-2 0v-2.07A7 7 0 0 1 6.07 12H4a1 1 0 1 1 0-2h2.07A7 7 0 0 1 11 5.07V3a1 1 0 0 1 1-1zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/></svg>
+        </div>
+        <!-- Radio: non cliquable, icône talkie -->
+        <div id="radioPill" class="pill" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10v2H7zM8 5h8a3 3 0 0 1 3 3v8a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V8a3 3 0 0 1 3-3zm0 4v7a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V9H8zm6 3.5a1.5 1.5 0 1 1-3.001.001A1.5 1.5 0 0 1 14 12.5z"/></svg>
           <span id="radioText"></span>
-        </a>
+        </div>
       </div>
     </div>
   </header>
 
   <main class="container">
-    <!-- Annonce centrée -->
+    <!-- Annonce centrée plus petite -->
     <section id="hero" class="hero" hidden>
       <div id="heroLine" class="hero-line"></div>
       <div id="heroSub" class="hero-sub"></div>
     </section>
+    <div class="spacer-below-hero"></div>
 
     <!-- Filtres -->
     <div class="filters" id="filters" aria-label="Filtres catégories"></div>
@@ -193,7 +199,13 @@
 
     /* ===== Utils ===== */
     const hasText = v => typeof v === 'string' ? v.trim().length > 0 : Boolean(v);
-    const money = (v, cur) => Number(v||0).toFixed(2) + ' ' + (cur||'EUR');
+
+    // Affiche prix en euros SANS centimes, avec séparateur thousands FR (ex: 3 500 €)
+    function priceEUR(value){
+      const n = Math.round(Number(value||0));
+      return n.toLocaleString('fr-FR') + ' €';
+    }
+
     const byOrder = (a,b) => Number(a.order ?? 9999) - Number(b.order ?? 9999);
 
     function setThemeAndFont(s){
@@ -210,40 +222,31 @@
       logo.alt = (settings.shop_title? settings.shop_title+' — ' : '') + 'Logo';
       document.getElementById('shopTitle').textContent = settings.shop_title || 'Boutique';
 
-      // Ouverte/Fermée
-      const openBadge = document.getElementById('openBadge');
-      const isOpen = String(settings.is_open).toLowerCase() === 'true' || settings.is_open === true;
-      openBadge.textContent = isOpen ? 'Ouvert' : 'Fermé';
-      openBadge.className = 'badge ' + (isOpen? 'badge-open' : 'badge-closed');
-
-      // Téléphone CTA
-      const phoneCTA = document.getElementById('phoneCTA');
+      // Téléphone (non cliquable)
+      const phonePill = document.getElementById('phonePill');
       if(hasText(settings.phone)){
-        const tel = String(settings.phone).replace(/\s+/g,'').replace(/^0/,'+33');
-        phoneCTA.href = 'tel:' + tel;
         document.getElementById('phoneText').textContent = String(settings.phone).trim();
-        phoneCTA.hidden = false;
+        phonePill.hidden = false;
       } else {
-        phoneCTA.hidden = true;
+        phonePill.hidden = true;
         document.getElementById('phoneText').textContent = '';
       }
 
-      // Radio CTA
-      const radioCTA = document.getElementById('radioCTA');
+      // Radio (non cliquable)
+      const radioPill = document.getElementById('radioPill');
       if(hasText(settings.radio)){
         document.getElementById('radioText').textContent = String(settings.radio).trim();
-        radioCTA.href = '#radio'; // ancre ou lecteur externe si besoin
-        radioCTA.hidden = false;
+        radioPill.hidden = false;
       } else {
-        radioCTA.hidden = true;
+        radioPill.hidden = true;
         document.getElementById('radioText').textContent = '';
       }
 
-      // Annonce centrée
+      // Annonce centrée plus petite
       const hero = document.getElementById('hero');
       if(hasText(settings.announcement)){
         document.getElementById('heroLine').textContent = settings.announcement.trim().toUpperCase();
-        document.getElementById('heroSub').textContent = ''; // place libre pour horaires/adresse si tu veux
+        document.getElementById('heroSub').textContent = '';
         hero.hidden = false;
       } else {
         hero.hidden = true;
@@ -261,7 +264,6 @@
         if(!map.has(cat)) map.set(cat, []);
         map.get(cat).push(p);
       });
-      // tri interne
       for(const arr of map.values()){ arr.sort(byOrder); }
       return map;
     }
@@ -270,28 +272,29 @@
     function renderFilters(categories){
       const filters = document.getElementById('filters');
       filters.innerHTML = '';
+
+      function setActive(btn){
+        for(const el of filters.querySelectorAll('.chip')) el.setAttribute('aria-pressed','false');
+        btn.setAttribute('aria-pressed','true');
+      }
+
       const allChip = document.createElement('button');
       allChip.className='chip';
       allChip.textContent='Toutes';
       allChip.setAttribute('aria-pressed','true');
-      allChip.addEventListener('click', ()=>applyFilter(null));
+      allChip.addEventListener('click', ()=>{ setActive(allChip); applyFilter(null); });
       filters.appendChild(allChip);
 
       categories.forEach(cat=>{
         const b = document.createElement('button');
         b.className='chip';
         b.textContent=cat;
-        b.addEventListener('click', ()=>{
-          for(const el of filters.querySelectorAll('.chip')) el.setAttribute('aria-pressed','false');
-          b.setAttribute('aria-pressed','true');
-          applyFilter(cat);
-        });
+        b.addEventListener('click', ()=>{ setActive(b); applyFilter(cat); });
         filters.appendChild(b);
       });
     }
 
     function cardHTML(p){
-      const tags = Array.isArray(p.tags) ? p.tags : [];
       return `
         <article class="card fade-in">
           <div class="wrap">
@@ -300,9 +303,9 @@
           </div>
           <div class="body">
             <h3 class="title-sm">${p.title||'Sans titre'}</h3>
-            <p class="price">${money(p.price, p.currency)}</p>
+            <p class="price">${priceEUR(p.price)}</p>
             <p class="desc">${p.description||''}</p>
-            ${tags.length ? `<div class="tags">${tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>` : ''}
+            <!-- tags cachés volontairement -->
           </div>
         </article>`;
     }
@@ -313,7 +316,6 @@
       const root = document.getElementById('sections');
       root.innerHTML = '';
       const cats = [...CATEGORY_INDEX.keys()].sort((a,b)=>a.localeCompare(b,'fr',{sensitivity:'base'}));
-
       const toRender = filterCat ? cats.filter(c=>c===filterCat) : cats;
 
       toRender.forEach(cat=>{
@@ -326,6 +328,8 @@
 
     function applyFilter(cat){
       renderSections(cat);
+      // scroll vers le début des sections pour lisibilité
+      document.getElementById('sections').scrollIntoView({behavior:'smooth', block:'start'});
     }
 
     /* ===== Chargement ===== */
@@ -346,7 +350,6 @@
       const settings = data.settings || {};
       const products = Array.isArray(data.products) ? data.products : [];
       renderHeader(settings);
-
       CATEGORY_INDEX = buildCategoryIndex(products);
       renderFilters([...CATEGORY_INDEX.keys()]);
       renderSections(null);
