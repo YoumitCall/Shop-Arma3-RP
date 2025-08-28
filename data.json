@@ -4,7 +4,6 @@
     "shop_title": "CHOSMARKET",
     "phone": "0613356281",
     "radio": "77.7",
-    "is_open": true,
     "announcement": "Votre Supermarché entre Agios Dionysios et Lakka",
     "theme_primary": "#111827",
     "theme_accent": "#2563eb",
@@ -31,7 +30,7 @@
     "category": "Alimentation",
     "tags": ["graines", "apéritif"],
     "image": "images/graines_citrouille.png",
-    "in_stock": false,
+    "in_stock": true,
     "order": 2,
     "description": "Graines de citrouille décortiquées, riches en nutriments."
   },
