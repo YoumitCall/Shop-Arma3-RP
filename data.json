@@ -93,7 +93,7 @@
     "image": "images/pack_camera.png",
     "in_stock": true,
     "order": 7,
-    "description": "Pack caméra complet pour capturer photos et vidéos."
+    "description": "Pack caméra complet pour capturer vos meilleurs moments."
   },
   {
     "id": "d2",
@@ -189,7 +189,7 @@
     "image": "images/kit_reparation.png",
     "in_stock": true,
     "order": 15,
-    "description": "Kit complet pour réparer temporairement un pneu."
+    "description": "Kit complet pour réparer temporairement votre véhicule."
   },
   {
     "id": "au4",
