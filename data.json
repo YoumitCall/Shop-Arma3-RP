@@ -19,7 +19,7 @@
       "category": "Alimentation",
       "tags": ["légume", "courge"],
       "image": "images/citrouille.jpg",
-      "in_stock": true,
+      "in_stock": false,
       "order": 1,
       "description": "Citrouille entière, idéale pour cuisiner ou décorer."
     },
@@ -67,7 +67,7 @@
       "category": "Alimentation",
       "tags": ["plat", "fast-food"],
       "image": "images/pizza.jpg",
-      "in_stock": true,
+      "in_stock": false,
       "order": 5,
       "description": "Pizza garnie de fromage et pepperoni."
     },
