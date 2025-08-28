@@ -1,11 +1,11 @@
 {
   "settings": {
     "logo_url": "images/logo.png",
-    "shop_title": "Boutique Roleplay",
+    "shop_title": "CHOSMARKET",
     "phone": "",
     "radio": "Canal 77.7 MHz",
-    "is_open": true,
-    "announcement": "Promo d'ouverture ce soir.",
+    "is_open": false,
+    "announcement": "Promo d'ouverture ce soir 20H.",
     "theme_primary": "#111827",
     "theme_accent": "#2563eb",
     "font_family": "Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
