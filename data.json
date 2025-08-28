@@ -18,7 +18,7 @@
       "currency": "EUR",
       "category": "Alimentation",
       "tags": ["légume", "courge"],
-      "image": "images/citrouille.jpg",
+      "image": "images/citrouille.png",
       "in_stock": false,
       "order": 1,
       "description": "Citrouille entière, idéale pour cuisiner ou décorer."
