@@ -31,7 +31,7 @@
     "category": "Alimentation",
     "tags": ["graines", "apéritif"],
     "image": "images/graines_citrouille.png",
-    "in_stock": true,
+    "in_stock": false,
     "order": 2,
     "description": "Graines de citrouille décortiquées, riches en nutriments."
   },
