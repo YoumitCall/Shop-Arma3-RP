@@ -5,147 +5,129 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Vitrine Boutique</title>
 
-  <!-- Favicon panier en SVG (data URL) -->
+  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml"
-        href='data:image/svg+xml;utf8,
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-          <defs>
-            <linearGradient id="g" x1="0" x2="1">
-              <stop offset="0" stop-color="%232563eb"/>
-              <stop offset="1" stop-color="%2395a4ff"/>
-            </linearGradient>
-          </defs>
-          <rect width="64" height="64" rx="12" fill="%23111827"/>
-          <path d="M14 22h36l-3 22a6 6 0 0 1-6 5H23a6 6 0 0 1-6-5l-3-22z" fill="url(%23g)" stroke="%23aab4ff" stroke-width="2"/>
-          <path d="M22 22l5-8m15 8l-5-8" stroke="%23aab4ff" stroke-width="2" stroke-linecap="round"/>
-        </svg>'>
+    href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="%23111827"/><path d="M14 22h36l-3 22a6 6 0 0 1-6 5H23a6 6 0 0 1-6-5l-3-22z" fill="%232563eb"/></svg>'>
 
   <style>
-    /* =====================
-       VARIABLES / THEME
-       ===================== */
     :root{
-      --color-primary: #0b1220;   /* surchargé par JS */
-      --color-accent:  #6ea8ff;   /* surchargé par JS */
-      --font-family:   Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      --color-primary:#111827;   /* surchargé par data.json */
+      --color-accent:#2563eb;    /* surchargé par data.json */
+      --font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
 
-      /* dérivés */
-      --bg:        #0b0f19;
-      --bg-soft:   #0f1526;
-      --panel:     #121a2f;
-      --text:      #e6e9ef;
-      --muted:     #a7b0c3;
-      --border:    #1f2a44;
-      --glow:      rgba(110,168,255,.35);
-      --shadow:    rgba(0,0,0,.45);
+      --bg:#0b0f19; --bg-soft:#0f1526; --panel:#111827;
+      --text:#e6e9ef; --muted:#a7b0c3; --border:#1f2a44;
+      --cta:#ef4444; /* rouge */
+      --cta2:#f97316; /* orange */
+      --shadow:rgba(0,0,0,.45);
     }
 
-    @media (prefers-reduced-motion: no-preference) {
-      @keyframes rise { from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:translateY(0)} }
-      @keyframes pulseGlow { 0%,100%{box-shadow:0 0 0 rgba(0,0,0,0), 0 0 0 rgba(0,0,0,0)} 50%{box-shadow:0 0 0 rgba(0,0,0,0), 0 0 32px var(--glow)} }
-      .fade-in{animation: rise .4s ease-out both}
-      .glow-pulse{animation: pulseGlow 3.6s ease-in-out infinite}
+    @media (prefers-reduced-motion:no-preference){
+      @keyframes rise{from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none}}
+      @keyframes pulse{0%,100%{box-shadow:0 0 0 rgba(0,0,0,0)} 50%{box-shadow:0 0 24px rgba(249,115,22,.35)}}
+      .fade-in{animation:rise .35s ease-out both}
+      .pulse{animation:pulse 2.8s ease-in-out infinite}
     }
 
     html,body{height:100%}
     body{
-      margin:0; font-family: var(--font-family);
-      color:var(--text); background: var(--bg);
+      margin:0; font-family:var(--font-family);
+      color:var(--text); background:var(--bg);
       -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      /* fond “pro” */
       background-image:
-        radial-gradient(1200px 600px at 10% -10%, rgba(110,168,255,.18), transparent 60%),
-        radial-gradient(1000px 500px at 100% 0%, rgba(37,99,235,.12), transparent 55%),
-        linear-gradient(180deg, #0b0f19 0%, #0a0d16 100%);
+        radial-gradient(900px 500px at 15% -10%, rgba(37,99,235,.14), transparent 60%),
+        radial-gradient(1000px 500px at 100% 0%, rgba(37,99,235,.10), transparent 55%),
+        linear-gradient(180deg,#0b0f19 0%,#0a0d16 100%);
     }
-    .container{max-width:1200px; margin:0 auto; padding:0 20px}
+    .container{max-width:1200px; margin:0 auto; padding:0 24px}
 
-    /* =====================
-       CARDS / EFFETS
-       ===================== */
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00));
-      border:1px solid var(--border);
-      border-radius:16px; overflow:hidden;
-      box-shadow: 0 6px 18px var(--shadow);
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-      backdrop-filter: saturate(120%) blur(6px);
-    }
-    .card:hover{
-      transform: translateY(-3px);
-      border-color: color-mix(in oklab, var(--color-accent) 35%, var(--border));
-      box-shadow: 0 12px 28px rgba(0,0,0,.55), 0 0 24px var(--glow);
-    }
-
-    /* =====================
-       HEADER
-       ===================== */
+    /* Header */
     header{
-      position:sticky; top:0; z-index:10;
-      background: rgba(10,14,24,.6);
-      backdrop-filter: blur(10px) saturate(130%);
+      position:sticky; top:0; z-index:20;
+      background:rgba(10,14,24,.6);
+      backdrop-filter:blur(10px) saturate(130%);
       border-bottom:1px solid var(--border);
     }
-    .header-wrap{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 0}
+    .header-wrap{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 0}
     .brand{display:flex; align-items:center; gap:12px}
-    .brand img{height:42px; width:42px; object-fit:contain; filter: drop-shadow(0 4px 10px var(--shadow))}
-    .title{font-size:1.6rem; font-weight:700; letter-spacing:.2px}
+    .brand img{height:56px; width:56px; object-fit:contain; filter:drop-shadow(0 4px 10px var(--shadow))}
+    .title{font-size:1.8rem; font-weight:800; letter-spacing:.2px}
+
+    /* Badges ouverture */
     .badge{padding:6px 12px; border-radius:999px; font-size:.85rem; font-weight:700; border:1px solid var(--border)}
-    .badge-open{background: linear-gradient(180deg, rgba(34,197,94,.18), rgba(34,197,94,.08)); color:#86efac}
-    .badge-closed{background: linear-gradient(180deg, rgba(239,68,68,.18), rgba(239,68,68,.08)); color:#fca5a5}
+    .badge-open{background:linear-gradient(180deg, rgba(34,197,94,.20), rgba(34,197,94,.08)); color:#86efac}
+    .badge-closed{background:linear-gradient(180deg, rgba(239,68,68,.20), rgba(239,68,68,.08)); color:#fca5a5}
 
-    /* CONTACTS */
-    .contacts{display:flex; align-items:center; gap:18px}
-    .contact{display:flex; align-items:center; gap:8px; font-size:.95rem; color:var(--text)}
-    .contact[hidden]{display:none !important}
-    .contact svg{width:18px; height:18px; fill: currentColor; opacity:.9}
-
-    /* =====================
-       ANNONCE
-       ===================== */
-    .announcement{
-      background: linear-gradient(180deg, rgba(37,99,235,.20), rgba(37,99,235,.10));
-      color: #e8edff; border:1px solid color-mix(in oklab, var(--color-accent) 40%, var(--border));
-      border-radius:12px; padding:12px 14px; margin:18px 0;
-      box-shadow: inset 0 0 24px rgba(110,168,255,.12);
+    /* CTA téléphone / radio */
+    .actions{display:flex; align-items:center; gap:14px}
+    .cta{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 14px; border-radius:999px;
+      background:linear-gradient(135deg,var(--cta),var(--cta2));
+      color:#fff; font-weight:800; letter-spacing:.3px;
+      border:1px solid rgba(0,0,0,.15);
+      box-shadow:0 8px 18px rgba(249,115,22,.25);
+      transform:translateZ(0);
     }
-    .announcement[hidden]{display:none !important}
+    .cta svg{width:18px; height:18px; fill:currentColor}
+    .cta[hidden]{display:none !important}
 
-    /* =====================
-       GRILLE PRODUITS
-       ===================== */
-    .grid{display:grid; gap:18px; grid-template-columns:1fr}
-    @media(min-width:720px){.grid{grid-template-columns:repeat(2,1fr)}}
-    @media(min-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
-    .card img{width:100%; height:210px; object-fit:cover; background:#0b1220}
-    .card-body{padding:14px 16px}
-    .card-title{font-size:1.1rem; font-weight:700; margin:0 0 6px}
-    .price{opacity:.9; margin:0 0 8px; font-weight:600; color:var(--color-accent)}
-    .desc{font-size:.95rem; color:var(--muted)}
-    .badge-stock{
-      position:absolute; top:10px; left:10px; padding:6px 10px; border-radius:999px; font-size:.75rem;
-      background: linear-gradient(180deg, rgba(251,191,36,.22), rgba(251,191,36,.10)); color:#fde68a;
-      border:1px solid rgba(251,191,36,.35); backdrop-filter: blur(4px);
+    /* Annonce centrée */
+    .hero{
+      text-align:center; margin:28px 0 20px 0;
+      padding:24px 0 8px 0;
     }
-    .card-wrap{position:relative}
-
-    /* =====================
-       LIENS / ACCENTS
-       ===================== */
-    .accent{color: var(--color-accent)}
-    .primary{color: var(--text)}
-    .btn{
-      display:inline-block; padding:10px 14px; border-radius:12px;
-      border:1px solid color-mix(in oklab, var(--color-accent) 65%, var(--border));
-      color:var(--text); background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.00));
-      box-shadow: 0 0 0 rgba(0,0,0,0);
-      transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+    .hero-line{
+      font-weight:900; text-transform:uppercase; letter-spacing:.12em;
+      font-size:clamp(1.2rem, 2.5vw + .6rem, 2rem);
+      color:#eef2ff;
     }
-    .btn:hover{ transform: translateY(-1px); box-shadow: 0 8px 20px var(--shadow), 0 0 18px var(--glow) }
+    .hero-sub{margin-top:8px; color:var(--muted); font-weight:600}
+    .hero[hidden]{display:none !important}
 
-    /* =====================
-       FOOTER
-       ===================== */
+    /* Filtres catégories */
+    .filters{display:flex; flex-wrap:wrap; gap:10px; margin:10px 0 18px}
+    .chip{
+      padding:8px 12px; border-radius:999px; font-weight:700; font-size:.9rem;
+      border:1px solid var(--border); background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.00));
+      cursor:pointer; user-select:none;
+    }
+    .chip[aria-pressed="true"]{border-color:color-mix(in oklab, var(--color-accent) 60%, var(--border)); color:var(--text)}
+
+    /* Sections par catégorie */
+    .section{margin:18px 0 8px}
+    .section h2{
+      font-size:1.15rem; font-weight:900; letter-spacing:.06em; text-transform:uppercase;
+      margin:8px 0 10px; color:#eaf0ff;
+      border-left:4px solid var(--color-accent); padding-left:10px;
+    }
+
+    /* Grille vignettes */
+    .grid{display:grid; gap:14px; grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00));
+      border:1px solid var(--border);
+      border-radius:16px; overflow:hidden;
+      box-shadow:0 6px 16px var(--shadow);
+      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+      backdrop-filter:saturate(120%) blur(6px);
+    }
+    .card:hover{transform:translateY(-2px); border-color:color-mix(in oklab, var(--color-accent) 40%, var(--border))}
+    .thumb{width:100%; height:140px; object-fit:cover; background:#0b1220}
+    .body{padding:10px 12px}
+    .title-sm{font-size:1rem; font-weight:800; margin:0 0 6px}
+    .price{margin:0 0 6px; font-weight:800; color:var(--color-accent)}
+    .desc{font-size:.9rem; color:var(--muted); line-height:1.35}
+    .tags{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px}
+    .tag{font-size:.72rem; padding:4px 8px; border-radius:999px; border:1px solid var(--border); color:#cbd5e1}
+
+    .oos{
+      position:absolute; top:8px; left:8px; padding:6px 10px; border-radius:999px; font-size:.72rem;
+      background:linear-gradient(180deg, rgba(251,191,36,.22), rgba(251,191,36,.10)); color:#fde68a;
+      border:1px solid rgba(251,191,36,.35); backdrop-filter:blur(4px);
+    }
+    .wrap{position:relative}
+
     footer{border-top:1px solid var(--border); margin-top:28px; padding:18px 0; font-size:.875rem; color:var(--muted)}
   </style>
 </head>
@@ -153,185 +135,223 @@
   <!-- HEADER -->
   <header>
     <div class="container header-wrap">
-      <div class="brand fade-in glow-pulse">
+      <div class="brand fade-in">
         <img id="logo" src="" alt="Logo boutique" />
-        <div class="title primary" id="shopTitle">Boutique</div>
+        <div class="title" id="shopTitle">Boutique</div>
       </div>
-      <div class="contacts">
+
+      <div class="actions">
         <span id="openBadge" class="badge">—</span>
-        <div id="phoneBlock" class="contact" hidden>
+        <a id="phoneCTA" class="cta pulse" hidden>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5.5a1 1 0 0 1 1-1H7.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
           <span id="phoneText"></span>
-        </div>
-        <div id="radioBlock" class="contact" hidden>
+        </a>
+        <a id="radioCTA" class="cta" hidden>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a1 1 0 0 1 1 1v2.07a7 7 0 0 1 4.93 4.93H20a1 1 0 1 1 0 2h-2.07A7 7 0 0 1 13 17.93V20a1 1 0 1 1-2 0v-2.07A7 7 0 0 1 6.07 12H4a1 1 0 1 1 0-2h2.07A7 7 0 0 1 11 5.07V3a1 1 0 0 1 1-1zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/></svg>
           <span id="radioText"></span>
-        </div>
+        </a>
       </div>
     </div>
   </header>
 
   <main class="container">
-    <div id="announcement" class="announcement fade-in" hidden></div>
+    <!-- Annonce centrée -->
+    <section id="hero" class="hero" hidden>
+      <div id="heroLine" class="hero-line"></div>
+      <div id="heroSub" class="hero-sub"></div>
+    </section>
 
-    <section id="grid" class="grid" aria-live="polite"></section>
+    <!-- Filtres -->
+    <div class="filters" id="filters" aria-label="Filtres catégories"></div>
+
+    <!-- Sections catégories -->
+    <div id="sections"></div>
 
     <p id="statusMsg" style="display:none; margin:14px 0; color:#fca5a5">Données indisponibles. Affichage d’un exemple local.</p>
   </main>
 
   <footer class="container">
-    <span>Vitrine statique • Thème et contenu pilotés par <code>data.json</code></span>
+    <span>Vitrine statique • Thème et contenu via <code>data.json</code></span>
   </footer>
 
   <script>
-    // =====================
-    // FALLBACK
-    // =====================
+    /* ===== Fallback minimal ===== */
     const FALLBACK_DATA = {
       settings: {
         logo_url: "https://dummyimage.com/80x80/111827/ffffff&text=LOGO",
         shop_title: "Ma Boutique RP",
         phone: "",
-        radio: "Canal 77.7 MHz",
+        radio: "",
         is_open: true,
-        announcement: "Ouverture ce soir, offres spéciales roleplay.",
-        theme_primary: "#0b1220",
-        theme_accent: "#6ea8ff",
+        announcement: "OUVERTURE CE SOIR 20H",
+        theme_primary: "#111827",
+        theme_accent: "#2563eb",
         font_family: "Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
       },
-      products: [
-        {
-          id:"p1",
-          title:"Chaise Vintage",
-          price:129.0,
-          currency:"EUR",
-          category:"Mobilier",
-          tags:["bois","vintage"],
-          image:"https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=800&q=80&auto=format&fit=crop",
-          in_stock:true,
-          order:1,
-          description:"Chaise en bois patiné, idéale pour votre vitrine RP."
-        },
-        {
-          id:"p2",
-          title:"Table Basse",
-          price:199.9,
-          currency:"EUR",
-          category:"Salon",
-          tags:["acier","industrieL"],
-          image:"https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=800&q=80&auto=format&fit=crop",
-          in_stock:false,
-          order:2,
-          description:"Plateau en chêne, structure acier."
-        }
-      ]
+      products: []
     };
 
-    // =====================
-    // UTILS
-    // =====================
-    function money(v, cur){
-      const n = Number(v||0);
-      return n.toFixed(2) + ' ' + (cur||'EUR');
-    }
-    function setThemeAndFont(settings){
-      document.documentElement.style.setProperty('--color-primary', settings.theme_primary || '#0b1220');
-      document.documentElement.style.setProperty('--color-accent', settings.theme_accent || '#6ea8ff');
-      document.documentElement.style.setProperty('--font-family', settings.font_family || 'Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif');
-    }
-    function byOrder(a,b){
-      const aa = Number(a.order ?? 9999);
-      const bb = Number(b.order ?? 9999);
-      return aa - bb;
-    }
+    /* ===== Utils ===== */
     const hasText = v => typeof v === 'string' ? v.trim().length > 0 : Boolean(v);
+    const money = (v, cur) => Number(v||0).toFixed(2) + ' ' + (cur||'EUR');
+    const byOrder = (a,b) => Number(a.order ?? 9999) - Number(b.order ?? 9999);
 
-    // =====================
-    // RENDU
-    // =====================
-    function renderAll(data){
-      const {settings, products} = data;
+    function setThemeAndFont(s){
+      document.documentElement.style.setProperty('--color-primary', s.theme_primary || '#111827');
+      document.documentElement.style.setProperty('--color-accent',  s.theme_accent  || '#2563eb');
+      document.documentElement.style.setProperty('--font-family',   s.font_family   || 'Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif');
+    }
 
-      // Logo & titre
+    /* ===== Rendu header + hero ===== */
+    function renderHeader(settings){
+      // Logo + titre
       const logo = document.getElementById('logo');
       logo.src = settings.logo_url || '';
-      logo.alt = (settings.shop_title? settings.shop_title + ' — ' : '') + 'Logo';
+      logo.alt = (settings.shop_title? settings.shop_title+' — ' : '') + 'Logo';
       document.getElementById('shopTitle').textContent = settings.shop_title || 'Boutique';
 
-      // Ouvert / Fermé
+      // Ouverte/Fermée
       const openBadge = document.getElementById('openBadge');
       const isOpen = String(settings.is_open).toLowerCase() === 'true' || settings.is_open === true;
       openBadge.textContent = isOpen ? 'Ouvert' : 'Fermé';
       openBadge.className = 'badge ' + (isOpen? 'badge-open' : 'badge-closed');
 
-      // Contacts
-      const phoneBlock = document.getElementById('phoneBlock');
-      const radioBlock = document.getElementById('radioBlock');
-
+      // Téléphone CTA
+      const phoneCTA = document.getElementById('phoneCTA');
       if(hasText(settings.phone)){
+        const tel = String(settings.phone).replace(/\s+/g,'').replace(/^0/,'+33');
+        phoneCTA.href = 'tel:' + tel;
         document.getElementById('phoneText').textContent = String(settings.phone).trim();
-        phoneBlock.hidden = false;
+        phoneCTA.hidden = false;
       } else {
-        phoneBlock.hidden = true;
+        phoneCTA.hidden = true;
         document.getElementById('phoneText').textContent = '';
       }
 
+      // Radio CTA
+      const radioCTA = document.getElementById('radioCTA');
       if(hasText(settings.radio)){
         document.getElementById('radioText').textContent = String(settings.radio).trim();
-        radioBlock.hidden = false;
+        radioCTA.href = '#radio'; // ancre ou lecteur externe si besoin
+        radioCTA.hidden = false;
       } else {
-        radioBlock.hidden = true;
+        radioCTA.hidden = true;
         document.getElementById('radioText').textContent = '';
       }
 
-      // Annonce
-      const ann = document.getElementById('announcement');
+      // Annonce centrée
+      const hero = document.getElementById('hero');
       if(hasText(settings.announcement)){
-        ann.textContent = settings.announcement.trim();
-        ann.hidden = false;
+        document.getElementById('heroLine').textContent = settings.announcement.trim().toUpperCase();
+        document.getElementById('heroSub').textContent = ''; // place libre pour horaires/adresse si tu veux
+        hero.hidden = false;
       } else {
-        ann.hidden = true;
+        hero.hidden = true;
       }
-
-      // Produits
-      const grid = document.getElementById('grid');
-      grid.innerHTML = '';
-      (products||[]).slice().sort(byOrder).forEach(p => {
-        const card = document.createElement('article');
-        card.className = 'card fade-in';
-        card.innerHTML = `
-          <div class="card-wrap">
-            ${p.in_stock === false ? '<div class="badge-stock">Indisponible</div>' : ''}
-            <img src="${p.image||''}" alt="${(p.title||'Produit')}" loading="lazy" />
-          </div>
-          <div class="card-body">
-            <h3 class="card-title primary">${p.title||'Sans titre'}</h3>
-            <p class="price">${money(p.price, p.currency)}</p>
-            <p class="desc">${p.description||''}</p>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
 
       // Thème
       setThemeAndFont(settings);
     }
 
-    // =====================
-    // CHARGEMENT
-    // =====================
+    /* ===== Indexation catégories ===== */
+    function buildCategoryIndex(products){
+      const map = new Map();
+      products.forEach(p=>{
+        const cat = hasText(p.category) ? String(p.category).trim() : 'Divers';
+        if(!map.has(cat)) map.set(cat, []);
+        map.get(cat).push(p);
+      });
+      // tri interne
+      for(const arr of map.values()){ arr.sort(byOrder); }
+      return map;
+    }
+
+    /* ===== Filtres et sections ===== */
+    function renderFilters(categories){
+      const filters = document.getElementById('filters');
+      filters.innerHTML = '';
+      const allChip = document.createElement('button');
+      allChip.className='chip';
+      allChip.textContent='Toutes';
+      allChip.setAttribute('aria-pressed','true');
+      allChip.addEventListener('click', ()=>applyFilter(null));
+      filters.appendChild(allChip);
+
+      categories.forEach(cat=>{
+        const b = document.createElement('button');
+        b.className='chip';
+        b.textContent=cat;
+        b.addEventListener('click', ()=>{
+          for(const el of filters.querySelectorAll('.chip')) el.setAttribute('aria-pressed','false');
+          b.setAttribute('aria-pressed','true');
+          applyFilter(cat);
+        });
+        filters.appendChild(b);
+      });
+    }
+
+    function cardHTML(p){
+      const tags = Array.isArray(p.tags) ? p.tags : [];
+      return `
+        <article class="card fade-in">
+          <div class="wrap">
+            ${p.in_stock === false ? '<div class="oos">Indisponible</div>' : ''}
+            <img class="thumb" src="${p.image||''}" alt="${(p.title||'Produit')}" loading="lazy" />
+          </div>
+          <div class="body">
+            <h3 class="title-sm">${p.title||'Sans titre'}</h3>
+            <p class="price">${money(p.price, p.currency)}</p>
+            <p class="desc">${p.description||''}</p>
+            ${tags.length ? `<div class="tags">${tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>` : ''}
+          </div>
+        </article>`;
+    }
+
+    let CATEGORY_INDEX = new Map();
+
+    function renderSections(filterCat=null){
+      const root = document.getElementById('sections');
+      root.innerHTML = '';
+      const cats = [...CATEGORY_INDEX.keys()].sort((a,b)=>a.localeCompare(b,'fr',{sensitivity:'base'}));
+
+      const toRender = filterCat ? cats.filter(c=>c===filterCat) : cats;
+
+      toRender.forEach(cat=>{
+        const sec = document.createElement('section');
+        sec.className='section';
+        sec.innerHTML = `<h2>${cat}</h2><div class="grid">${CATEGORY_INDEX.get(cat).map(cardHTML).join('')}</div>`;
+        root.appendChild(sec);
+      });
+    }
+
+    function applyFilter(cat){
+      renderSections(cat);
+    }
+
+    /* ===== Chargement ===== */
     async function loadData(){
       const status = document.getElementById('statusMsg');
       try{
-        const res = await fetch('data.json', {cache:'no-store'});
+        const res = await fetch('./data.json', {cache:'no-store'});
         if(!res.ok) throw new Error('HTTP ' + res.status);
         const data = await res.json();
-        renderAll(data);
-      }catch(err){
-        status.style.display = 'block';
-        renderAll(FALLBACK_DATA);
+        start(data);
+      }catch(e){
+        status.style.display='block';
+        start(FALLBACK_DATA);
       }
     }
+
+    function start(data){
+      const settings = data.settings || {};
+      const products = Array.isArray(data.products) ? data.products : [];
+      renderHeader(settings);
+
+      CATEGORY_INDEX = buildCategoryIndex(products);
+      renderFilters([...CATEGORY_INDEX.keys()]);
+      renderSections(null);
+    }
+
     loadData();
   </script>
 </body>
