@@ -35,7 +35,6 @@ Toutes les variables modifiables sont regroupées dans le fichier [`data.json`](
 | `shop_title`        | Titre affiché dans la barre supérieure du site (nom de votre magasin).             |
 | `phone`             | Numéro de téléphone fictif à afficher sous forme de « pilule » dans l’en‑tête.     |
 | `radio`             | Fréquence radio pour communiquer avec vos clients RP.                              |
-| `is_open`           | `true` pour afficher le catalogue ; `false` pour afficher un message « Fermé ».    |
 | `announcement`      | Slogan ou message d’accueil dans la section héro (majuscule automatiquement).      |
 | `theme_primary`     | Couleur de fond principale du thème (hexadécimal, ex. `#111827`).                  |
 | `theme_accent`      | Couleur d’accent utilisée pour les boutons et filtres (hexadécimal).               |
