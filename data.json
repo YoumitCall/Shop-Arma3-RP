@@ -1,0 +1,39 @@
+{
+  "settings": {
+    "logo_url": "images/logo.png",
+    "shop_title": "Boutique Roleplay",
+    "phone": "",
+    "radio": "Canal 77.7 MHz",
+    "is_open": true,
+    "announcement": "Promo d'ouverture ce soir.",
+    "theme_primary": "#111827",
+    "theme_accent": "#2563eb",
+    "font_family": "Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+  },
+  "products": [
+    {
+      "id": "p1",
+      "title": "Chaise Vintage",
+      "price": 129.0,
+      "currency": "EUR",
+      "category": "Mobilier",
+      "tags": ["bois", "vintage"],
+      "image": "images/chaise.jpg",
+      "in_stock": true,
+      "order": 1,
+      "description": "Chaise en bois patiné."
+    },
+    {
+      "id": "p2",
+      "title": "Table Basse",
+      "price": 199.9,
+      "currency": "EUR",
+      "category": "Salon",
+      "tags": ["acier"],
+      "image": "images/table.jpg",
+      "in_stock": false,
+      "order": 2,
+      "description": "Plateau chêne, structure acier."
+    }
+  ]
+}
