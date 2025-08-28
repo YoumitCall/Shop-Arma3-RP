@@ -30,7 +30,7 @@
       "currency": "EUR",
       "category": "Alimentation",
       "tags": ["graines", "apéritif"],
-      "image": "images/graines_citrouille.jpg",
+      "image": "images/graines_citrouille.png",
       "in_stock": true,
       "order": 2,
       "description": "Graines de citrouille décortiquées, riches en nutriments."
@@ -42,7 +42,7 @@
       "currency": "EUR",
       "category": "Alimentation",
       "tags": ["fruit", "méditerranéen"],
-      "image": "images/olive.jpg",
+      "image": "images/olive.png",
       "in_stock": true,
       "order": 3,
       "description": "Olive verte, parfaite pour accompagner vos plats."
@@ -54,7 +54,7 @@
       "currency": "EUR",
       "category": "Alimentation",
       "tags": ["boisson", "hydratation"],
-      "image": "images/bouteille_eau.jpg",
+      "image": "images/bouteille_eau.png",
       "in_stock": true,
       "order": 4,
       "description": "Bouteille d’eau minérale, source d’hydratation."
@@ -66,7 +66,7 @@
       "currency": "EUR",
       "category": "Alimentation",
       "tags": ["plat", "fast-food"],
-      "image": "images/pizza.jpg",
+      "image": "images/pizza.png",
       "in_stock": false,
       "order": 5,
       "description": "Pizza garnie de fromage et pepperoni."
@@ -78,7 +78,7 @@
       "currency": "EUR",
       "category": "Santé",
       "tags": ["santé", "secours"],
-      "image": "images/bandage.jpg",
+      "image": "images/bandage.png",
       "in_stock": true,
       "order": 6,
       "description": "Bandage de premiers secours, usage médical."
