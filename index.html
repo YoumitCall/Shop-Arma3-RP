@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
+  <!-- viewport optimisée mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>ChosMarket</title>
 
@@ -11,14 +12,13 @@
 
   <style>
     :root{
-      --color-primary:#111827;   /* surchargé par data.json */
-      --color-accent:#2563eb;    /* surchargé par data.json */
+      --color-primary:#111827;
+      --color-accent:#2563eb;
       --font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
 
       --bg:#0b0f19; --bg-soft:#0f1526; --panel:#111827;
       --text:#e6e9ef; --muted:#a7b0c3; --border:#1f2a44;
-      --cta:#ef4444; /* rouge */
-      --cta2:#f97316; /* orange */
+      --cta:#ef4444; --cta2:#f97316;
       --shadow:rgba(0,0,0,.45);
     }
 
@@ -46,13 +46,17 @@
       backdrop-filter:blur(10px) saturate(130%);
       border-bottom:1px solid var(--border);
     }
-    .header-wrap{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 0}
-    .brand{display:flex; align-items:center; gap:12px}
+    .header-wrap{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; padding:16px 0;
+      flex-wrap:wrap; /* permet de passer les pilules à la ligne sur mobile */
+    }
+    .brand{display:flex; align-items:center; gap:12px; min-width:0; flex:1 1 auto;}
     .brand img{height:56px; width:56px; object-fit:contain; filter:drop-shadow(0 4px 10px var(--shadow))}
-    .title{font-size:1.8rem; font-weight:800; letter-spacing:.2px}
+    .title{font-size:1.8rem; font-weight:800; letter-spacing:.2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
 
     /* Info téléphone / radio (non cliquables) */
-    .actions{display:flex; align-items:center; gap:12px}
+    .actions{display:flex; align-items:center; gap:12px; flex-shrink:0;}
     .pill{
       display:inline-flex; align-items:center; gap:10px;
       padding:10px 14px; border-radius:999px;
@@ -60,35 +64,32 @@
       color:#fff; font-weight:800; letter-spacing:.3px;
       border:1px solid rgba(0,0,0,.15);
       box-shadow:0 6px 14px rgba(249,115,22,.22);
-      user-select:text;
+      user-select:text; flex-shrink:0;
     }
     .pill svg{width:18px; height:18px; fill:currentColor}
     .pill[hidden]{display:none !important}
 
-    /* Annonce centrée plus petite + espacement généreux en dessous */
+    /* Annonce */
     .hero{
       text-align:center;
-      margin:24px 0 36px 0;       /* espace au dessus */
+      margin:24px 0 36px 0;
       padding:0;
     }
     .hero-line{
       font-weight:900; text-transform:uppercase; letter-spacing:.12em;
-      /* plus petit que le logo (1.8rem) */
       font-size:clamp(1rem, 1.4rem + 1vw, 1.5rem);
       color:#eef2ff;
+      white-space:pre-line; /* support des \n depuis data.json */
     }
     .hero-sub{margin-top:6px; color:var(--muted); font-weight:600}
-    .spacer-below-hero{height:28px}  /* pousse les filtres et la grille vers le bas */
+    .spacer-below-hero{height:28px}
     .hero[hidden]{display:none !important}
 
-    /* Filtres catégories lisibles même inactifs */
+    /* Filtres */
     .filters{display:flex; flex-wrap:wrap; gap:10px; margin:0 0 18px}
     .chip{
       padding:8px 12px; border-radius:999px; font-weight:700; font-size:.9rem;
-      border:1px solid #324064;
-      background:#1a2236;          /* lisible sur fond sombre */
-      color:#cbd5e1;
-      cursor:pointer; user-select:none;
+      border:1px solid #324064; background:#1a2236; color:#cbd5e1; cursor:pointer; user-select:none;
     }
     .chip:hover{filter:brightness(1.1)}
     .chip[aria-pressed="true"]{
@@ -98,7 +99,7 @@
     }
     .chip:focus-visible{outline:2px solid var(--color-accent); outline-offset:2px}
 
-    /* Sections par catégorie */
+    /* Sections */
     .section{margin:18px 0 8px}
     .section h2{
       font-size:1.05rem; font-weight:900; letter-spacing:.06em; text-transform:uppercase;
@@ -122,7 +123,6 @@
     .title-sm{font-size:1rem; font-weight:800; margin:0 0 6px}
     .price{margin:0 0 6px; font-weight:800; color:var(--color-accent)}
     .desc{font-size:.9rem; color:var(--muted); line-height:1.35}
-    /* tags masqués visuellement (conservés dans data.json) */
     .tags{display:none}
 
     .oos{
@@ -134,21 +134,26 @@
 
     footer{border-top:1px solid var(--border); margin-top:28px; padding:18px 0; font-size:.875rem; color:var(--muted)}
 
-    /* --- Fix mobile layout/zoom/pan --- */
+    /* --- Fix mobile layout / visibilité du header --- */
     *, *::before, *::after { box-sizing: border-box; }
     html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
     img, video { max-width: 100%; height: auto; display: block; }
     body { touch-action: manipulation; -webkit-text-size-adjust: 100%; }
 
     .container { padding-left: 16px; padding-right: 16px; }
-    @media (max-width: 380px) {
-      .container { padding-left: 12px; padding-right: 12px; }
+    @media (max-width: 380px) { .container { padding-left: 12px; padding-right: 12px; } }
+
+    /* Sur mobile : titre plus petit, logo réduit, pilules sur une nouvelle ligne */
+    @media (max-width: 640px){
+      .brand img{width:48px; height:48px}
+      .title{font-size:clamp(1.1rem, 6vw, 1.5rem)}
+      .actions{flex-basis:100%; justify-content:flex-start; gap:8px; order:2}
+      .pill{padding:8px 10px}
+      .pill svg{width:16px; height:16px}
     }
 
     .grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
-    @media (max-width: 360px) {
-      .grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
-    }
+    @media (max-width: 360px) { .grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; } }
 
     .card { border-radius: 14px; }
     .title-sm { font-size: .95rem; }
@@ -171,7 +176,7 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5.5a1 1 0 0 1 1-1H7.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/></svg>
           <span id="phoneText"></span>
         </div>
-        <!-- Radio: non cliquable, icône talkie -->
+        <!-- Radio: non cliquable -->
         <div id="radioPill" class="pill" hidden>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10v2H7zM8 5h8a3 3 0 0 1 3 3v8a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V8a3 3 0 0 1 3-3zm0 4v7a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V9H8zm6 3.5a1.5 1.5 0 1 1-3.001.001A1.5 1.5 0 0 1 14 12.5z"/></svg>
           <span id="radioText"></span>
@@ -181,7 +186,7 @@
   </header>
 
   <main class="container">
-    <!-- Annonce centrée plus petite -->
+    <!-- Annonce -->
     <section id="hero" class="hero" hidden>
       <div id="heroLine" class="hero-line"></div>
       <div id="heroSub" class="hero-sub"></div>
@@ -191,7 +196,7 @@
     <!-- Filtres -->
     <div class="filters" id="filters" aria-label="Filtres catégories"></div>
 
-    <!-- Sections catégories -->
+    <!-- Sections -->
     <div id="sections"></div>
 
     <p id="statusMsg" style="display:none; margin:14px 0; color:#fca5a5">Données indisponibles. Affichage d’un exemple local.</p>
@@ -221,7 +226,6 @@
     /* ===== Utils ===== */
     const hasText = v => typeof v === 'string' ? v.trim().length > 0 : Boolean(v);
 
-    // Affiche prix en euros SANS centimes, avec séparateur thousands FR (ex: 3 500 €)
     function priceEUR(value){
       const n = Math.round(Number(value||0));
       return n.toLocaleString('fr-FR') + ' €';
@@ -237,13 +241,11 @@
 
     /* ===== Rendu header + hero ===== */
     function renderHeader(settings){
-      // Logo + titre
       const logo = document.getElementById('logo');
       logo.src = settings.logo_url || '';
       logo.alt = (settings.shop_title? settings.shop_title+' — ' : '') + 'Logo';
       document.getElementById('shopTitle').textContent = settings.shop_title || 'Boutique';
 
-      // Téléphone (non cliquable)
       const phonePill = document.getElementById('phonePill');
       if(hasText(settings.phone)){
         document.getElementById('phoneText').textContent = String(settings.phone).trim();
@@ -253,7 +255,6 @@
         document.getElementById('phoneText').textContent = '';
       }
 
-      // Radio (non cliquable)
       const radioPill = document.getElementById('radioPill');
       if(hasText(settings.radio)){
         document.getElementById('radioText').textContent = String(settings.radio).trim();
@@ -263,7 +264,6 @@
         document.getElementById('radioText').textContent = '';
       }
 
-      // Annonce centrée
       const hero = document.getElementById('hero');
       if(hasText(settings.announcement)){
         document.getElementById('heroLine').textContent = settings.announcement.trim().toUpperCase();
@@ -273,7 +273,6 @@
         hero.hidden = true;
       }
 
-      // Thème
       setThemeAndFont(settings);
     }
 
@@ -326,7 +325,6 @@
             <h3 class="title-sm">${p.title||'Sans titre'}</h3>
             <p class="price">${priceEUR(p.price)}</p>
             <p class="desc">${p.description||''}</p>
-            <!-- tags cachés volontairement -->
           </div>
         </article>`;
     }
@@ -349,7 +347,6 @@
 
     function applyFilter(cat){
       renderSections(cat);
-      // scroll vers le début des sections pour lisibilité
       document.getElementById('sections').scrollIntoView({behavior:'smooth', block:'start'});
     }
 
