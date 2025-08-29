@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>ChosMarket</title>
 
   <!-- Favicon -->
@@ -133,6 +133,27 @@
     .wrap{position:relative}
 
     footer{border-top:1px solid var(--border); margin-top:28px; padding:18px 0; font-size:.875rem; color:var(--muted)}
+
+    /* --- Fix mobile layout/zoom/pan --- */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+    img, video { max-width: 100%; height: auto; display: block; }
+    body { touch-action: manipulation; -webkit-text-size-adjust: 100%; }
+
+    .container { padding-left: 16px; padding-right: 16px; }
+    @media (max-width: 380px) {
+      .container { padding-left: 12px; padding-right: 12px; }
+    }
+
+    .grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+    @media (max-width: 360px) {
+      .grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+    }
+
+    .card { border-radius: 14px; }
+    .title-sm { font-size: .95rem; }
+    .desc { font-size: .88rem; line-height: 1.4; }
+    .thumb { height: 128px; }
   </style>
 </head>
 <body>
